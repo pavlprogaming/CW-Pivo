@@ -1,0 +1,45 @@
+// ==UserScript==
+// @name         CW: Пиво Web
+// @version      1.0
+// @description  ты крутой;
+// @author       Искажённый Судьбой
+// @copyright    2021 sladkoppop
+// @license      MIT; https://opensource.org/licenses/MIT
+// @include      https://catwar.su/cw3/*
+// @grant        GM_xmlhttpRequest
+// @grant        GM.xmlHttpRequest
+// ==/UserScript==
+
+(function (win, $) {
+  'use strict';
+
+  if (typeof $ === 'undefined') return;
+  const pageurl = window.location.href;
+  const isCW3 = (/^https:\/\/catwar.su\/cw3(?!(\/kns|\/jagd))/.test(pageurl));
+  try {
+    if (isCW3) cw3();
+  }
+  catch (err) {
+    win.console.error('Пиво Web err: ', err);
+  }
+
+  function cw3() {
+    $(document).ready(function () {
+      $("head").append(`<style>div[style="background: url(\\"things/20.png\\") 100% 0% no-repeat, url(\\"things/20.png\\") 0% 0% no-repeat;"] {
+  background-image: url("https://i.imgur.com/QSrIB4K.png") 100% 0% no-repeat, url("https://i.imgur.com/QSrIB4K.png") 0% 0% no-repeat !important;
+}
+div[style="background: url(\\"things/20.png\\") 0% 0% no-repeat;"] {
+  background-image: url("https://i.imgur.com/QSrIB4K.png") !important;
+}</style>`);
+     /* $(".cage_items").attrchange({
+        callback: function () {
+          if ($(this).attr('style').indexOf('things/20.png') !== -1) {
+            let link = $(this).attr('style');
+            link = link.replace('things/20.png', 'https://i.imgur.com/QSrIB4K.png');
+            $(this).attr('style', link);
+          }
+        }
+      });*/
+    });
+  }
+})(window, jQuery);
